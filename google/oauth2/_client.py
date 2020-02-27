@@ -126,7 +126,7 @@ def _token_endpoint_request(request, token_uri, body):
     return response_data
 
 
-def jwt_grant(request, token_uri, assertion):
+def jwt_grant(request, token_uri, assertion, scopes=None):
     """Implements the JWT Profile for OAuth 2.0 Authorization Grants.
 
     For more details, see `rfc7523 section 4`_.
@@ -149,6 +149,9 @@ def jwt_grant(request, token_uri, assertion):
     .. _rfc7523 section 4: https://tools.ietf.org/html/rfc7523#section-4
     """
     body = {"assertion": assertion, "grant_type": _JWT_GRANT_TYPE}
+
+    if scopes is not None:
+        body["scopes"] = scopes
 
     response_data = _token_endpoint_request(request, token_uri, body)
 
