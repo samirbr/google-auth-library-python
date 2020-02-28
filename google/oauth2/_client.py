@@ -151,7 +151,7 @@ def jwt_grant(request, token_uri, assertion, scopes=None):
     body = {"assertion": assertion, "grant_type": _JWT_GRANT_TYPE}
 
     if scopes is not None:
-        body["scopes"] = scopes
+        body["scope"] = scopes
 
     response_data = _token_endpoint_request(request, token_uri, body)
 
