@@ -329,9 +329,9 @@ class Credentials(credentials.Signing, credentials.Scoped, credentials.Credentia
         return token
 
     @_helpers.copy_docstring(credentials.Credentials)
-    def refresh(self, request, scopes=None):
+    def refresh(self, request):
         assertion = self._make_authorization_grant_assertion()
-        access_token, expiry, _ = _client.jwt_grant(request, self._token_uri, assertion, scopes)
+        access_token, expiry, _ = _client.jwt_grant(request, self._token_uri, assertion, self._scopes)
         self.token = access_token
         self.expiry = expiry
 
